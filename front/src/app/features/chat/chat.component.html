@@ -1,0 +1,31 @@
+<div class="card">
+  <h2>Chat Support — PoC</h2>
+
+  <div class="row">
+    <label>
+      Rôle :
+      <select [(ngModel)]="role">
+        <option value="client">client</option>
+        <option value="agent">agent</option>
+      </select>
+    </label>
+
+    <label>
+      Conversation ID :
+      <input [(ngModel)]="conversationId" placeholder="global" />
+    </label>
+
+    <button (click)="connect()" [disabled]="connected">Se connecter</button>
+  </div>
+
+  <div class="log">
+    <div *ngFor="let m of log">
+      <strong>[{{ m.conversationId }}] {{ m.fromRole }}:</strong> {{ m.content }}
+    </div>
+  </div>
+
+  <div class="send">
+    <input [(ngModel)]="content" (keyup.enter)="send()" placeholder="Votre message..." />
+    <button (click)="send()" [disabled]="!connected">Envoyer</button>
+  </div>
+</div>
